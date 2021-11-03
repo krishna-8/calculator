@@ -18,6 +18,7 @@ export default function calculate(obj, buttonName) {
       total: null,
       next: null,
       operation: null,
+      tempHistory: "",
     };
   }
 
@@ -80,10 +81,15 @@ export default function calculate(obj, buttonName) {
 
   if (buttonName === "=") {
     if (obj.next && obj.operation) {
+      let calc = obj.total.toString() + obj.operation.toString() + obj.next.toString();
+      let calcH = obj.calcHistory;
+      let total = operate(obj.total, obj.next, obj.operation)
+      calcH.push((calc + "=" + total))
       return {
-        total: operate(obj.total, obj.next, obj.operation),
+        total: total,
         next: null,
         operation: null,
+        calcHistory: calcH,
       };
     } else {
       // '=' with no operation, nothing to do
@@ -111,10 +117,15 @@ export default function calculate(obj, buttonName) {
 
   // User pressed an operation button and there is an existing operation
   if (obj.operation) {
+    let calc = obj.total.toString() + obj.operation.toString() + obj.next.toString();
+    let calcH = obj.calcHistory;
+    let total = operate(obj.total, obj.next, obj.operation)
+    calcH.push((calc + "=" + total))
     return {
-      total: operate(obj.total, obj.next, obj.operation),
+      total: total,
       next: null,
       operation: buttonName,
+      calcHistory: calcH,
     };
   }
 

@@ -9,11 +9,19 @@ export default class App extends React.Component {
     total: null,
     next: null,
     operation: null,
+    calcHistory: [],
   };
 
   handleClick = buttonName => {
     this.setState(calculate(this.state, buttonName));
+    // if (buttonName==="=") {
+    //   console.log(this.state.total) // this total is not the current total it is the previous saved value.
+    // }
   };
+
+  componentDidUpdate() {
+    console.log(this.state.calcHistory);
+  }
 
   render() {
     return (
