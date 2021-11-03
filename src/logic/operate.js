@@ -20,5 +20,15 @@ export default function operate(numberOne, numberTwo, operation) {
       return one.div(two).toString();
     }
   }
+  if (operation === "x^y") {
+    if (two === "0") {
+      // alert("Divide by 0 error");
+      return "1";
+    } else {
+      console.log(two.toString())
+      // console.log(two.toNumber())
+      return one.pow(parseFloat(numberTwo)).toString();
+    }
+  }
   throw Error(`Unknown operation '${operation}'`);
 }
